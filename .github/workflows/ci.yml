@@ -13,19 +13,22 @@ jobs:
   backend:
     name: Backend (build + test)
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-dotnet@v4
         with:
-          global-json-file: global.json
-      - run: dotnet restore KulturRotasi.slnx
-      - run: dotnet build KulturRotasi.slnx --no-restore --configuration Release
-      - run: dotnet test KulturRotasi.slnx --no-build --configuration Release --collect:"XPlat Code Coverage" --results-directory ./TestResults
+          global-json-file: backend/global.json
+      - run: dotnet restore
+      - run: dotnet build --no-restore --configuration Release
+      - run: dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage" --results-directory ./TestResults
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: backend-test-results
-          path: TestResults
+          path: backend/TestResults
 
   frontend:
     name: Frontend (build + test)

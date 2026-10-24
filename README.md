@@ -70,10 +70,11 @@ cp .env.example .env          # then set your own password
 docker compose up -d
 
 # 2. API  → http://localhost:5140/swagger
-dotnet run --project backend/src/KulturRotasi.Api
+cd backend
+dotnet run --project src/KulturRotasi.Api
 
 # 3. Frontend  → http://localhost:4200
-cd frontend
+cd ../frontend
 npm install
 npm start
 ```
@@ -81,7 +82,7 @@ npm start
 ### Tests
 
 ```bash
-dotnet test                       # from the repository root
+cd backend && dotnet test
 cd frontend && npm run test:ci
 ```
 
@@ -89,7 +90,6 @@ cd frontend && npm run test:ci
 
 ```
 kultur-rotasi/
-├─ KulturRotasi.slnx   .NET solution (open this folder in Rider or Visual Studio)
 ├─ backend/
 │  ├─ src/        Domain · Application · Infrastructure · Api
 │  └─ tests/      UnitTests · IntegrationTests
