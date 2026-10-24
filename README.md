@@ -90,10 +90,10 @@ cd frontend && npm run test:ci
 
 ```
 kultur-rotasi/
-├─ backend/
+├─ backend/        open this folder in Rider (KulturRotasi.slnx)
 │  ├─ src/        Domain · Application · Infrastructure · Api
 │  └─ tests/      UnitTests · IntegrationTests
-├─ frontend/      Angular app
+├─ frontend/       open this folder in WebStorm/Rider (Angular app)
 ├─ docs/          UML class diagram, ER diagram, BPMN process (coming)
 ├─ docker-compose.yml
 └─ .github/workflows/ci.yml
