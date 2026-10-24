@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/KulturRotasi.Api/KulturRotasi.Api.csproj" />
+    <Project Path="src/KulturRotasi.Application/KulturRotasi.Application.csproj" />
+    <Project Path="src/KulturRotasi.Domain/KulturRotasi.Domain.csproj" />
+    <Project Path="src/KulturRotasi.Infrastructure/KulturRotasi.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/KulturRotasi.IntegrationTests/KulturRotasi.IntegrationTests.csproj" />
+    <Project Path="tests/KulturRotasi.UnitTests/KulturRotasi.UnitTests.csproj" />
+  </Folder>
+</Solution>
