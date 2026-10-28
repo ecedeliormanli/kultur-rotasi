@@ -1,17 +1,24 @@
 using KulturRotasi.Application;
 using KulturRotasi.Infrastructure;
+using KulturRotasi.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
     .AddApplication()
-    .AddInfrastructure();
+    .AddInfrastructure(builder.Configuration);
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
-builder.Services.AddHealthChecks();
+builder.Services.AddHealthChecks()
+    .AddDbContextCheck<AppDbContext>("database");
 
 var app = builder.Build();
+
+if (app.Configuration.GetValue<bool>("Database:MigrateAndSeedOnStartup"))
+{
+    await app.Services.MigrateAndSeedAsync();
+}
 
 if (app.Environment.IsDevelopment())
 {
@@ -25,4 +32,4 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapHealthChecks("/health");
 
-app.Run();
+await app.RunAsync();

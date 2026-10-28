@@ -66,10 +66,11 @@ git clone https://github.com/ecedeliormanli/kultur-rotasi.git
 cd kultur-rotasi
 
 # 1. Database (SQL Server in Docker)
-cp .env.example .env          # then set your own password
+cp .env.example .env          # if you change the password, also change it in appsettings.Development.json
 docker compose up -d
 
 # 2. API  → http://localhost:5140/swagger
+#    In Development the API applies migrations and seeds 81 provinces and 40 places on startup.
 cd backend
 dotnet run --project src/KulturRotasi.Api
 
@@ -82,8 +83,16 @@ npm start
 ### Tests
 
 ```bash
-cd backend && dotnet test
+cd backend && dotnet test      # integration tests start their own SQL Server with Testcontainers (Docker required)
 cd frontend && npm run test:ci
+```
+
+### Database migrations
+
+```bash
+cd backend
+dotnet tool restore            # installs dotnet-ef from dotnet-tools.json
+dotnet ef migrations add <Name> -p src/KulturRotasi.Infrastructure -s src/KulturRotasi.Api -o Persistence/Migrations
 ```
 
 ## Project structure
@@ -94,7 +103,7 @@ kultur-rotasi/
 │  ├─ src/        Domain · Application · Infrastructure · Api
 │  └─ tests/      UnitTests · IntegrationTests
 ├─ frontend/       open this folder in WebStorm/Rider (Angular app)
-├─ docs/          UML class diagram, ER diagram, BPMN process (coming)
+├─ docs/          ER diagram (UML class diagram and BPMN process coming)
 ├─ docker-compose.yml
 └─ .github/workflows/ci.yml
 ```
@@ -102,7 +111,7 @@ kultur-rotasi/
 ## Roadmap
 
 - [x] M0 Repository skeleton, Docker Compose, CI
-- [ ] M1 Domain model, EF Core, spatial data, seed data, ER diagram
+- [x] M1 Domain model, EF Core, spatial data, seed data, ER diagram
 - [ ] M2 Spatial API: filtering, nearest, buffer, point-in-polygon, GeoJSON
 - [ ] M3 Angular + Leaflet map, Turkish and English UI
 - [ ] M4 Thematic map, heatmap, GeoJSON and KML import and export
@@ -110,6 +119,11 @@ kultur-rotasi/
 - [ ] M6 Authentication, roles, OWASP hardening, suggestion workflow, BPMN
 - [ ] M7 Favourites, routes, SignalR notifications, Redis cache
 - [ ] M8 Structured logging, health checks, Azure deployment
+
+## Data sources
+
+- **Province boundaries:** [geoBoundaries](https://www.geoboundaries.org/) (gbOpen, TUR ADM1, 2021), derived from OpenStreetMap. © OpenStreetMap contributors, CC BY-SA 2.0.
+- **Places:** a small, hand-curated sample written for this project. Coordinates are approximate.
 
 ## License
 

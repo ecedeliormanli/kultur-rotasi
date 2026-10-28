@@ -1,0 +1,725 @@
+{
+  "note": "Hand-curated sample data. Coordinates are approximate; descriptions are short summaries written for this project.",
+  "places": [
+    {
+      "slug": "museum-of-anatolian-civilizations",
+      "type": "Museum",
+      "latitude": 39.9385,
+      "longitude": 32.8617,
+      "provincePlateCode": 6,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Anadolu Medeniyetleri Müzesi",
+          "description": "Paleolitik çağdan Osmanlı dönemine kadar Anadolu'nun arkeolojik eserlerini sergileyen müze."
+        },
+        "en": {
+          "name": "Museum of Anatolian Civilizations",
+          "description": "Museum displaying Anatolia's archaeological heritage from the Palaeolithic to the Ottoman period."
+        }
+      }
+    },
+    {
+      "slug": "anitkabir",
+      "type": "Monument",
+      "latitude": 39.925,
+      "longitude": 32.8369,
+      "provincePlateCode": 6,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Anıtkabir",
+          "description": "Mustafa Kemal Atatürk'ün anıt mezarı ve müzesi."
+        },
+        "en": {
+          "name": "Anıtkabir",
+          "description": "Mausoleum and museum of Mustafa Kemal Atatürk."
+        }
+      }
+    },
+    {
+      "slug": "erimtan-archaeology-and-arts-museum",
+      "type": "Museum",
+      "latitude": 39.9393,
+      "longitude": 32.865,
+      "provincePlateCode": 6,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Erimtan Arkeoloji ve Sanat Müzesi",
+          "description": "Ankara Kalesi yakınında, Anadolu'nun antik eserlerini sergileyen özel müze."
+        },
+        "en": {
+          "name": "Erimtan Archaeology and Arts Museum",
+          "description": "Private museum near Ankara Castle showing ancient artefacts from Anatolia."
+        }
+      }
+    },
+    {
+      "slug": "hagia-sophia",
+      "type": "Monument",
+      "latitude": 41.0086,
+      "longitude": 28.9802,
+      "provincePlateCode": 34,
+      "isUnescoWorldHeritage": true,
+      "translations": {
+        "tr": {
+          "name": "Ayasofya",
+          "description": "6. yüzyılda yapılan, Bizans ve Osmanlı mimarisinin simgesi olan yapı."
+        },
+        "en": {
+          "name": "Hagia Sophia",
+          "description": "6th-century landmark of Byzantine and Ottoman architecture."
+        }
+      }
+    },
+    {
+      "slug": "topkapi-palace",
+      "type": "Palace",
+      "latitude": 41.0115,
+      "longitude": 28.9834,
+      "provincePlateCode": 34,
+      "isUnescoWorldHeritage": true,
+      "translations": {
+        "tr": {
+          "name": "Topkapı Sarayı",
+          "description": "Osmanlı padişahlarının yaklaşık 400 yıl boyunca yaşadığı saray, bugün müze."
+        },
+        "en": {
+          "name": "Topkapı Palace",
+          "description": "Residence of the Ottoman sultans for about 400 years, now a museum."
+        }
+      }
+    },
+    {
+      "slug": "istanbul-archaeology-museums",
+      "type": "Museum",
+      "latitude": 41.0117,
+      "longitude": 28.9813,
+      "provincePlateCode": 34,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "İstanbul Arkeoloji Müzeleri",
+          "description": "Arkeoloji Müzesi, Eski Şark Eserleri Müzesi ve Çinili Köşk'ten oluşan müze kompleksi."
+        },
+        "en": {
+          "name": "Istanbul Archaeology Museums",
+          "description": "Museum complex of the Archaeology Museum, the Museum of the Ancient Orient and the Tiled Kiosk."
+        }
+      }
+    },
+    {
+      "slug": "basilica-cistern",
+      "type": "Monument",
+      "latitude": 41.0084,
+      "longitude": 28.9779,
+      "provincePlateCode": 34,
+      "isUnescoWorldHeritage": true,
+      "translations": {
+        "tr": {
+          "name": "Yerebatan Sarnıcı",
+          "description": "Bizans döneminden kalma, yüzlerce sütunlu yer altı sarnıcı."
+        },
+        "en": {
+          "name": "Basilica Cistern",
+          "description": "Byzantine underground cistern supported by hundreds of columns."
+        }
+      }
+    },
+    {
+      "slug": "ephesus",
+      "type": "ArchaeologicalSite",
+      "latitude": 37.9395,
+      "longitude": 27.3417,
+      "provincePlateCode": 35,
+      "isUnescoWorldHeritage": true,
+      "translations": {
+        "tr": {
+          "name": "Efes Antik Kenti",
+          "description": "Celsus Kütüphanesi ve büyük tiyatrosuyla tanınan antik liman kenti."
+        },
+        "en": {
+          "name": "Ephesus",
+          "description": "Ancient port city known for the Library of Celsus and its great theatre."
+        }
+      }
+    },
+    {
+      "slug": "pergamon",
+      "type": "ArchaeologicalSite",
+      "latitude": 39.132,
+      "longitude": 27.184,
+      "provincePlateCode": 35,
+      "isUnescoWorldHeritage": true,
+      "translations": {
+        "tr": {
+          "name": "Bergama Antik Kenti",
+          "description": "Akropolü ve Asklepion'u ile Helenistik dönemin önemli kentlerinden biri."
+        },
+        "en": {
+          "name": "Pergamon",
+          "description": "Major Hellenistic city with an acropolis and the Asklepion healing centre."
+        }
+      }
+    },
+    {
+      "slug": "troy",
+      "type": "ArchaeologicalSite",
+      "latitude": 39.9575,
+      "longitude": 26.2389,
+      "provincePlateCode": 17,
+      "isUnescoWorldHeritage": true,
+      "translations": {
+        "tr": {
+          "name": "Troya Antik Kenti",
+          "description": "4000 yıllık yerleşim katmanlarıyla İlyada destanına konu olan kent."
+        },
+        "en": {
+          "name": "Troy",
+          "description": "City of the Iliad legend with 4,000 years of settlement layers."
+        }
+      }
+    },
+    {
+      "slug": "hierapolis-pamukkale",
+      "type": "ArchaeologicalSite",
+      "latitude": 37.9257,
+      "longitude": 29.1253,
+      "provincePlateCode": 20,
+      "isUnescoWorldHeritage": true,
+      "translations": {
+        "tr": {
+          "name": "Hierapolis-Pamukkale",
+          "description": "Beyaz travertenlerin yanında kurulmuş antik kaplıca kenti."
+        },
+        "en": {
+          "name": "Hierapolis-Pamukkale",
+          "description": "Ancient spa city next to the white travertine terraces."
+        }
+      }
+    },
+    {
+      "slug": "laodicea",
+      "type": "ArchaeologicalSite",
+      "latitude": 37.8358,
+      "longitude": 29.1075,
+      "provincePlateCode": 20,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Laodikya Antik Kenti",
+          "description": "Kazıları süren, sütunlu caddeleri ve tiyatrolarıyla büyük antik kent."
+        },
+        "en": {
+          "name": "Laodicea",
+          "description": "Large ancient city with colonnaded streets and theatres, still being excavated."
+        }
+      }
+    },
+    {
+      "slug": "aphrodisias",
+      "type": "ArchaeologicalSite",
+      "latitude": 37.7085,
+      "longitude": 28.7239,
+      "provincePlateCode": 9,
+      "isUnescoWorldHeritage": true,
+      "translations": {
+        "tr": {
+          "name": "Afrodisias Antik Kenti",
+          "description": "Mermer heykel atölyeleri ve stadyumuyla ünlü Afrodit kenti."
+        },
+        "en": {
+          "name": "Aphrodisias",
+          "description": "City of Aphrodite famous for its marble sculpture workshops and stadium."
+        }
+      }
+    },
+    {
+      "slug": "gobeklitepe",
+      "type": "ArchaeologicalSite",
+      "latitude": 37.2231,
+      "longitude": 38.9225,
+      "provincePlateCode": 63,
+      "isUnescoWorldHeritage": true,
+      "translations": {
+        "tr": {
+          "name": "Göbeklitepe",
+          "description": "Yaklaşık 11.000 yıllık, bilinen en eski anıtsal tapınak alanlarından biri."
+        },
+        "en": {
+          "name": "Göbeklitepe",
+          "description": "One of the oldest known monumental sanctuaries, about 11,000 years old."
+        }
+      }
+    },
+    {
+      "slug": "sanliurfa-archaeology-museum",
+      "type": "Museum",
+      "latitude": 37.1585,
+      "longitude": 38.7811,
+      "provincePlateCode": 63,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Şanlıurfa Arkeoloji Müzesi",
+          "description": "Göbeklitepe buluntuları ve Balıklıgöl heykeli gibi eserleri sergileyen müze."
+        },
+        "en": {
+          "name": "Şanlıurfa Archaeology Museum",
+          "description": "Museum with finds from Göbeklitepe and the Balıklıgöl statue."
+        }
+      }
+    },
+    {
+      "slug": "mount-nemrut",
+      "type": "ArchaeologicalSite",
+      "latitude": 37.9806,
+      "longitude": 38.7408,
+      "provincePlateCode": 2,
+      "isUnescoWorldHeritage": true,
+      "translations": {
+        "tr": {
+          "name": "Nemrut Dağı",
+          "description": "Kommagene Kralı I. Antiokhos'un dev heykelli anıt mezarı."
+        },
+        "en": {
+          "name": "Mount Nemrut",
+          "description": "Tomb-sanctuary of King Antiochus I of Commagene with colossal statues."
+        }
+      }
+    },
+    {
+      "slug": "catalhoyuk",
+      "type": "ArchaeologicalSite",
+      "latitude": 37.667,
+      "longitude": 32.828,
+      "provincePlateCode": 42,
+      "isUnescoWorldHeritage": true,
+      "translations": {
+        "tr": {
+          "name": "Çatalhöyük",
+          "description": "Dünyanın bilinen en eski yerleşimlerinden biri olan Neolitik köy."
+        },
+        "en": {
+          "name": "Çatalhöyük",
+          "description": "Neolithic settlement, one of the earliest known towns in the world."
+        }
+      }
+    },
+    {
+      "slug": "mevlana-museum",
+      "type": "Museum",
+      "latitude": 37.8708,
+      "longitude": 32.505,
+      "provincePlateCode": 42,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Mevlana Müzesi",
+          "description": "Mevlana Celaleddin Rumi'nin türbesi ve Mevlevi dergâhı."
+        },
+        "en": {
+          "name": "Mevlana Museum",
+          "description": "Mausoleum of Rumi and the former Mevlevi lodge."
+        }
+      }
+    },
+    {
+      "slug": "hattusa",
+      "type": "ArchaeologicalSite",
+      "latitude": 40.0197,
+      "longitude": 34.6156,
+      "provincePlateCode": 19,
+      "isUnescoWorldHeritage": true,
+      "translations": {
+        "tr": {
+          "name": "Hattuşa",
+          "description": "Hitit İmparatorluğu'nun başkenti; Aslanlı Kapı ve Yazılıkaya burada."
+        },
+        "en": {
+          "name": "Hattusa",
+          "description": "Capital of the Hittite Empire with the Lion Gate and Yazılıkaya."
+        }
+      }
+    },
+    {
+      "slug": "alacahoyuk",
+      "type": "ArchaeologicalSite",
+      "latitude": 40.2342,
+      "longitude": 34.6953,
+      "provincePlateCode": 19,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Alacahöyük",
+          "description": "Sfenksli Kapı'sı ve Tunç Çağı kral mezarlarıyla bilinen höyük."
+        },
+        "en": {
+          "name": "Alacahöyük",
+          "description": "Mound known for its Sphinx Gate and Bronze Age royal tombs."
+        }
+      }
+    },
+    {
+      "slug": "goreme-open-air-museum",
+      "type": "Museum",
+      "latitude": 38.6406,
+      "longitude": 34.8456,
+      "provincePlateCode": 50,
+      "isUnescoWorldHeritage": true,
+      "translations": {
+        "tr": {
+          "name": "Göreme Açık Hava Müzesi",
+          "description": "Kapadokya'da freskli kaya kiliselerinden oluşan açık hava müzesi."
+        },
+        "en": {
+          "name": "Göreme Open-Air Museum",
+          "description": "Open-air museum of frescoed rock-cut churches in Cappadocia."
+        }
+      }
+    },
+    {
+      "slug": "zeugma-mosaic-museum",
+      "type": "Museum",
+      "latitude": 37.0761,
+      "longitude": 37.3842,
+      "provincePlateCode": 27,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Zeugma Mozaik Müzesi",
+          "description": "Çingene Kızı mozaiğiyle tanınan, dünyanın en büyük mozaik müzelerinden biri."
+        },
+        "en": {
+          "name": "Zeugma Mosaic Museum",
+          "description": "One of the largest mosaic museums, home of the Gypsy Girl mosaic."
+        }
+      }
+    },
+    {
+      "slug": "ani",
+      "type": "ArchaeologicalSite",
+      "latitude": 40.5075,
+      "longitude": 43.5728,
+      "provincePlateCode": 36,
+      "isUnescoWorldHeritage": true,
+      "translations": {
+        "tr": {
+          "name": "Ani Ören Yeri",
+          "description": "Arpaçay kıyısında, Orta Çağ'da önemli bir ticaret kenti olan harabe."
+        },
+        "en": {
+          "name": "Ani",
+          "description": "Ruins of a major medieval trading city on the Arpaçay river."
+        }
+      }
+    },
+    {
+      "slug": "sumela-monastery",
+      "type": "Monument",
+      "latitude": 40.69,
+      "longitude": 39.6583,
+      "provincePlateCode": 61,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Sümela Manastırı",
+          "description": "Altındere Vadisi'nde sarp bir kayalığa yapılmış manastır."
+        },
+        "en": {
+          "name": "Sumela Monastery",
+          "description": "Monastery built into a steep cliff in the Altındere Valley."
+        }
+      }
+    },
+    {
+      "slug": "aspendos",
+      "type": "ArchaeologicalSite",
+      "latitude": 36.9389,
+      "longitude": 31.1722,
+      "provincePlateCode": 7,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Aspendos",
+          "description": "Roma dönemine ait, en iyi korunmuş antik tiyatrolardan birine sahip kent."
+        },
+        "en": {
+          "name": "Aspendos",
+          "description": "City with one of the best-preserved Roman theatres."
+        }
+      }
+    },
+    {
+      "slug": "perge",
+      "type": "ArchaeologicalSite",
+      "latitude": 36.9614,
+      "longitude": 30.854,
+      "provincePlateCode": 7,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Perge Antik Kenti",
+          "description": "Pamfilya bölgesinin sütunlu caddeli büyük antik kenti."
+        },
+        "en": {
+          "name": "Perge",
+          "description": "Large ancient city of Pamphylia with colonnaded streets."
+        }
+      }
+    },
+    {
+      "slug": "side",
+      "type": "ArchaeologicalSite",
+      "latitude": 36.7672,
+      "longitude": 31.3889,
+      "provincePlateCode": 7,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Side Antik Kenti",
+          "description": "Apollon Tapınağı deniz kıyısında olan antik liman kenti."
+        },
+        "en": {
+          "name": "Side",
+          "description": "Ancient harbour town with the seaside Temple of Apollo."
+        }
+      }
+    },
+    {
+      "slug": "antalya-museum",
+      "type": "Museum",
+      "latitude": 36.8851,
+      "longitude": 30.68,
+      "provincePlateCode": 7,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Antalya Müzesi",
+          "description": "Perge heykelleri başta olmak üzere bölgenin arkeolojik eserlerini sergileyen müze."
+        },
+        "en": {
+          "name": "Antalya Museum",
+          "description": "Museum of the region's archaeology, notably the sculptures from Perge."
+        }
+      }
+    },
+    {
+      "slug": "termessos",
+      "type": "ArchaeologicalSite",
+      "latitude": 37.0336,
+      "longitude": 30.4686,
+      "provincePlateCode": 7,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Termessos",
+          "description": "Güllük Dağı'nda, Büyük İskender'in alamadığı söylenen dağ kenti."
+        },
+        "en": {
+          "name": "Termessos",
+          "description": "Mountain city on Güllük Dağı said to have resisted Alexander the Great."
+        }
+      }
+    },
+    {
+      "slug": "myra",
+      "type": "ArchaeologicalSite",
+      "latitude": 36.2589,
+      "longitude": 29.985,
+      "provincePlateCode": 7,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Myra Antik Kenti",
+          "description": "Kaya mezarları ve tiyatrosuyla bilinen Likya kenti."
+        },
+        "en": {
+          "name": "Myra",
+          "description": "Lycian city known for its rock-cut tombs and theatre."
+        }
+      }
+    },
+    {
+      "slug": "olympos",
+      "type": "ArchaeologicalSite",
+      "latitude": 36.3972,
+      "longitude": 30.4728,
+      "provincePlateCode": 7,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Olympos Antik Kenti",
+          "description": "Orman içindeki koyda kurulmuş Likya liman kenti."
+        },
+        "en": {
+          "name": "Olympos",
+          "description": "Lycian harbour city set in a forested bay."
+        }
+      }
+    },
+    {
+      "slug": "xanthos",
+      "type": "ArchaeologicalSite",
+      "latitude": 36.3561,
+      "longitude": 29.3183,
+      "provincePlateCode": 7,
+      "isUnescoWorldHeritage": true,
+      "translations": {
+        "tr": {
+          "name": "Ksanthos",
+          "description": "Likya Birliği'nin başkenti olan antik kent."
+        },
+        "en": {
+          "name": "Xanthos",
+          "description": "Capital of the ancient Lycian League."
+        }
+      }
+    },
+    {
+      "slug": "patara",
+      "type": "ArchaeologicalSite",
+      "latitude": 36.2626,
+      "longitude": 29.3143,
+      "provincePlateCode": 7,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Patara Antik Kenti",
+          "description": "Likya Birliği'nin meclis binasının bulunduğu liman kenti."
+        },
+        "en": {
+          "name": "Patara",
+          "description": "Harbour city housing the assembly building of the Lycian League."
+        }
+      }
+    },
+    {
+      "slug": "sardis",
+      "type": "ArchaeologicalSite",
+      "latitude": 38.4883,
+      "longitude": 28.04,
+      "provincePlateCode": 45,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Sardes Antik Kenti",
+          "description": "Lidya Krallığı'nın başkenti; gimnazyumu ve sinagoguyla tanınır."
+        },
+        "en": {
+          "name": "Sardis",
+          "description": "Capital of the Lydian kingdom, known for its gymnasium and synagogue."
+        }
+      }
+    },
+    {
+      "slug": "mausoleum-at-halicarnassus",
+      "type": "ArchaeologicalSite",
+      "latitude": 37.0379,
+      "longitude": 27.4241,
+      "provincePlateCode": 48,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Halikarnas Mozolesi",
+          "description": "Antik Dünyanın Yedi Harikası'ndan birinin kalıntıları."
+        },
+        "en": {
+          "name": "Mausoleum at Halicarnassus",
+          "description": "Remains of one of the Seven Wonders of the Ancient World."
+        }
+      }
+    },
+    {
+      "slug": "bodrum-castle",
+      "type": "Museum",
+      "latitude": 37.0319,
+      "longitude": 27.4292,
+      "provincePlateCode": 48,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Bodrum Kalesi ve Sualtı Arkeoloji Müzesi",
+          "description": "Kale içinde batık buluntularını sergileyen sualtı arkeoloji müzesi."
+        },
+        "en": {
+          "name": "Bodrum Castle and Museum of Underwater Archaeology",
+          "description": "Castle housing finds from ancient shipwrecks."
+        }
+      }
+    },
+    {
+      "slug": "ishak-pasha-palace",
+      "type": "Palace",
+      "latitude": 39.5197,
+      "longitude": 44.1306,
+      "provincePlateCode": 4,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "İshak Paşa Sarayı",
+          "description": "Doğubayazıt'ta Osmanlı, Selçuklu ve İran mimarisini birleştiren saray."
+        },
+        "en": {
+          "name": "İshak Pasha Palace",
+          "description": "Palace in Doğubayazıt blending Ottoman, Seljuk and Persian styles."
+        }
+      }
+    },
+    {
+      "slug": "mardin-museum",
+      "type": "Museum",
+      "latitude": 37.3122,
+      "longitude": 40.735,
+      "provincePlateCode": 47,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Mardin Müzesi",
+          "description": "Eski Süryani Katolik Patrikhanesi binasında kurulmuş müze."
+        },
+        "en": {
+          "name": "Mardin Museum",
+          "description": "Museum housed in the former Syriac Catholic Patriarchate."
+        }
+      }
+    },
+    {
+      "slug": "hasankeyf",
+      "type": "ArchaeologicalSite",
+      "latitude": 37.7136,
+      "longitude": 41.4136,
+      "provincePlateCode": 72,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Hasankeyf",
+          "description": "Dicle kıyısında binlerce yıllık yerleşim izleri taşıyan tarihi kent."
+        },
+        "en": {
+          "name": "Hasankeyf",
+          "description": "Historic town on the Tigris with thousands of years of settlement."
+        }
+      }
+    },
+    {
+      "slug": "kultepe",
+      "type": "ArchaeologicalSite",
+      "latitude": 38.8506,
+      "longitude": 35.635,
+      "provincePlateCode": 38,
+      "isUnescoWorldHeritage": false,
+      "translations": {
+        "tr": {
+          "name": "Kültepe (Kaniş-Karum)",
+          "description": "Asur ticaret kolonisi tabletleriyle Anadolu yazılı tarihinin başladığı yer."
+        },
+        "en": {
+          "name": "Kültepe (Kanesh)",
+          "description": "Assyrian trade colony whose tablets mark the start of written history in Anatolia."
+        }
+      }
+    }
+  ]
+}
