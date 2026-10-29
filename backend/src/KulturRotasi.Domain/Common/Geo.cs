@@ -1,5 +1,7 @@
 using NetTopologySuite;
+using NetTopologySuite.Algorithm;
 using NetTopologySuite.Geometries;
+using NetTopologySuite.Geometries.Utilities;
 
 namespace KulturRotasi.Domain.Common;
 
@@ -26,4 +28,36 @@ public static class Geo
 
         return Factory.CreatePoint(new Coordinate(longitude, latitude));
     }
+
+    /// <summary>
+    /// Prepares a geometry for SQL Server's <c>geography</c> type, which is stricter than plain GeoJSON:
+    /// the geometry must be valid, and a polygon's outer ring must run counter-clockwise (holes clockwise).
+    /// With the wrong orientation SQL Server reads the polygon as "the whole earth minus this area".
+    /// </summary>
+    public static Geometry PrepareForGeography(Geometry geometry)
+    {
+        var valid = GeometryFixer.Fix(geometry);
+
+        var prepared = valid switch
+        {
+            Polygon polygon => Orient(polygon),
+            MultiPolygon multi => Factory.CreateMultiPolygon(multi.Geometries.Cast<Polygon>().Select(Orient).ToArray()),
+            _ => valid,
+        };
+
+        prepared.SRID = Wgs84;
+        return prepared;
+    }
+
+    private static Polygon Orient(Polygon polygon)
+    {
+        var shell = EnsureOrientation(polygon.Shell, counterClockwise: true);
+        var holes = polygon.Holes.Select(h => EnsureOrientation(h, counterClockwise: false)).ToArray();
+        return Factory.CreatePolygon(shell, holes);
+    }
+
+    private static LinearRing EnsureOrientation(LinearRing ring, bool counterClockwise) =>
+        Orientation.IsCCW(ring.CoordinateSequence) == counterClockwise
+            ? ring
+            : (LinearRing)ring.Reverse();
 }
