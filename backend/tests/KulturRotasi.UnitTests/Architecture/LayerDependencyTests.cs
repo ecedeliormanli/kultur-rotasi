@@ -21,6 +21,17 @@ public class LayerDependencyTests
     }
 
     [Fact]
+    public void Domain_does_not_depend_on_entity_framework()
+    {
+        // The domain model must stay persistence-agnostic: no ORM attributes, no DbContext
+        var references = KulturRotasi.Domain.AssemblyReference.Assembly.GetReferencedAssemblies()
+            .Select(a => a.Name!)
+            .Where(name => name.StartsWith("Microsoft.EntityFrameworkCore", StringComparison.Ordinal));
+
+        Assert.Empty(references);
+    }
+
+    [Fact]
     public void Application_depends_only_on_domain()
     {
         var references = ReferencedProjects(KulturRotasi.Application.DependencyInjection.Assembly);

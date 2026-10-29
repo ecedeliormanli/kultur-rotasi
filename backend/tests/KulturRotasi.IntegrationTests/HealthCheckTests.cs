@@ -1,14 +1,14 @@
 using System.Net;
-using Microsoft.AspNetCore.Mvc.Testing;
+using KulturRotasi.IntegrationTests.Infrastructure;
 
 namespace KulturRotasi.IntegrationTests;
 
 /// <summary>Boots the whole API in memory and calls it over HTTP.</summary>
-public class HealthCheckTests(WebApplicationFactory<Program> factory)
-    : IClassFixture<WebApplicationFactory<Program>>
+[Collection(ApiTestGroup.Name)]
+public class HealthCheckTests(ApiFactory factory)
 {
     [Fact]
-    public async Task Health_endpoint_returns_healthy()
+    public async Task Health_endpoint_returns_healthy_when_database_is_reachable()
     {
         var client = factory.CreateClient();
 
