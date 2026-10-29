@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using KulturRotasi.Api.Infrastructure;
 using KulturRotasi.Application;
@@ -14,12 +15,10 @@ builder.Services
     .AddInfrastructure(builder.Configuration);
 
 builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        // Enums as "Museum" instead of 1; NetTopologySuite geometries as GeoJSON
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-        options.JsonSerializerOptions.Converters.Add(new GeoJsonConverterFactory(Geo.Factory));
-    });
+    .AddJsonOptions(options => ConfigureJson(options.JsonSerializerOptions));
+
+// The OpenAPI generator reads these options (not the MVC ones above), so both get the same settings
+builder.Services.ConfigureHttpJsonOptions(options => ConfigureJson(options.SerializerOptions));
 
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<ProblemExceptionHandler>();
@@ -60,3 +59,12 @@ app.MapControllers();
 app.MapHealthChecks("/health");
 
 await app.RunAsync();
+
+static void ConfigureJson(JsonSerializerOptions options)
+{
+    // Numbers must be JSON numbers ("web" defaults also accept "15" as a string, which confuses Swagger UI)
+    options.NumberHandling = JsonNumberHandling.Strict;
+    // Enums as "Museum" instead of 1; NetTopologySuite geometries as GeoJSON
+    options.Converters.Add(new JsonStringEnumConverter());
+    options.Converters.Add(new GeoJsonConverterFactory(Geo.Factory));
+}
