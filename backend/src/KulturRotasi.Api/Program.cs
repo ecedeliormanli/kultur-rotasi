@@ -32,7 +32,7 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SupportedUICultures = cultures;
 });
 
-builder.Services.AddOpenApi();
+builder.Services.AddOpenApi(options => options.AddSchemaTransformer(GeoJsonSchemaTransformer.TransformAsync));
 builder.Services.AddHealthChecks()
     .AddDbContextCheck<AppDbContext>("database");
 

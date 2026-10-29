@@ -18,7 +18,6 @@ namespace KulturRotasi.Api.Controllers;
 /// <remarks>Texts are returned in the language from <c>Accept-Language</c> or <c>?culture=</c> (tr or en, default tr).</remarks>
 [ApiController]
 [Route("api/places")]
-[Produces("application/json")]
 public sealed class PlacesController : ControllerBase
 {
     /// <summary>Lists places page by page, sorted by name.</summary>

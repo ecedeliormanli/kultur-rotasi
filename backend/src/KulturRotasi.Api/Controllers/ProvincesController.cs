@@ -12,7 +12,6 @@ namespace KulturRotasi.Api.Controllers;
 /// <summary>Türkiye's 81 provinces and their borders.</summary>
 [ApiController]
 [Route("api/provinces")]
-[Produces("application/json")]
 public sealed class ProvincesController : ControllerBase
 {
     /// <summary>Lists all provinces with the number of places inside each border.</summary>

@@ -10,12 +10,12 @@ namespace KulturRotasi.UnitTests.Application;
 public class ValidatorTests
 {
     [Theory]
-    [InlineData(39.92, 32.85, 50, 10, true)]
+    [InlineData(39.92, 32.85, 50.0, 10, true)]
     [InlineData(39.92, 32.85, null, 10, true)]
     [InlineData(91, 32.85, null, 10, false)]
     [InlineData(39.92, 181, null, 10, false)]
-    [InlineData(39.92, 32.85, 0, 10, false)]
-    [InlineData(39.92, 32.85, 501, 10, false)]
+    [InlineData(39.92, 32.85, 0.0, 10, false)]
+    [InlineData(39.92, 32.85, 501.0, 10, false)]
     [InlineData(39.92, 32.85, null, 0, false)]
     [InlineData(39.92, 32.85, null, 101, false)]
     public void Nearby_query_limits(double latitude, double longitude, double? radiusKm, int limit, bool expectedValid)

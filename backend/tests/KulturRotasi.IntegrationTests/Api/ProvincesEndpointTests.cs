@@ -61,5 +61,7 @@ public sealed class ProvincesEndpointTests(ApiFactory factory)
 
         Assert.Contains("/api/places/nearby", document, StringComparison.Ordinal);
         Assert.Contains("/api/provinces/{plateCode}/places", document, StringComparison.Ordinal);
+        // Geometries are documented as GeoJSON, not as NetTopologySuite's internal classes
+        Assert.DoesNotContain("GeometryFactory", document, StringComparison.Ordinal);
     }
 }
