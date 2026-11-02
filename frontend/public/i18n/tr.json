@@ -1,0 +1,38 @@
+{
+  "app": {
+    "title": "Kültür Rotası",
+    "tagline": "Türkiye'nin müze ve ören yerleri haritası",
+    "language": "Dil"
+  },
+  "placeType": {
+    "Museum": "Müze",
+    "ArchaeologicalSite": "Ören yeri",
+    "Monument": "Anıt",
+    "Palace": "Saray"
+  },
+  "filters": {
+    "type": "Tür",
+    "allTypes": "Tümü",
+    "unesco": "Sadece UNESCO Dünya Mirası",
+    "search": "Ara",
+    "searchPlaceholder": "ör. Efes",
+    "count": "Haritada {{count}} yer"
+  },
+  "detail": {
+    "close": "Kapat",
+    "province": "İl",
+    "unesco": "UNESCO Dünya Mirası",
+    "loading": "Yükleniyor…"
+  },
+  "nearby": {
+    "start": "Yakınımdakiler",
+    "stop": "Yakın arama modunu kapat",
+    "hint": "Haritada bir noktaya tıkla, çevresindeki yerleri bulalım.",
+    "radius": "Yarıçap: {{km}} km",
+    "results": "{{count}} yer bulundu",
+    "none": "Bu yarıçapta yer yok. Yarıçapı büyütmeyi dene."
+  },
+  "errors": {
+    "api": "API'ye ulaşılamadı. Backend çalışıyor mu?"
+  }
+}

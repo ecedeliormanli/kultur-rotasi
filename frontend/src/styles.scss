@@ -1,1 +1,124 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global styles. Component-specific styles live next to each component. */
+:root {
+  --text: #1f2937;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --surface: #ffffff;
+  --background: #f9fafb;
+  --accent: #0f766e;
+  --danger: #b91c1c;
+
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+}
+
+button {
+  font: inherit;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+
+  &.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  &.link {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--accent);
+    text-align: left;
+  }
+}
+
+input[type='search'],
+select {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+  padding: 0.4rem;
+  font: inherit;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+input[type='range'] {
+  display: block;
+  width: 100%;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+
+  &.inline {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+}
+
+.panel {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border);
+
+  h2 {
+    margin: 0.5rem 0 0.25rem;
+  }
+}
+
+.meta {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 0.8rem;
+}
+
+.dot {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-right: 0.35rem;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.legend,
+.results {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85rem;
+}
+
+.error {
+  margin: 1rem;
+  color: var(--danger);
+}

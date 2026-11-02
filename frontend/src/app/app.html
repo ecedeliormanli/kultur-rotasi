@@ -1,5 +1,16 @@
 <header class="app-header">
-  <h1>{{ title() }}</h1>
+  <div>
+    <h1>Kültür Rotası</h1>
+    <p>{{ 'app.tagline' | transloco }}</p>
+  </div>
+
+  <div class="languages" role="group" [attr.aria-label]="'app.language' | transloco">
+    @for (code of languages; track code) {
+      <button type="button" [class.active]="language.current() === code" (click)="use(code)">
+        {{ code.toUpperCase() }}
+      </button>
+    }
+  </div>
 </header>
 
 <main>

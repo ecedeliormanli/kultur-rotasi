@@ -1,0 +1,38 @@
+:host {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  height: 100%;
+}
+
+.sidebar {
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.map {
+  min-height: 0;
+}
+
+.results li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+}
+
+@media (max-width: 760px) {
+  :host {
+    grid-template-columns: 1fr;
+    grid-template-rows: 55vh auto;
+  }
+
+  .map {
+    grid-row: 1;
+  }
+
+  .sidebar {
+    border-right: 0;
+    border-top: 1px solid var(--border);
+  }
+}
