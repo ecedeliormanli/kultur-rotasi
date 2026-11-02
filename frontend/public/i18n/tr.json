@@ -40,7 +40,9 @@
     "markers": "Yerler",
     "heatmap": "Isı haritası (yoğunluk)",
     "provinces": "İllere göre yer sayısı",
-    "legend": "İl başına yer sayısı"
+    "legend": "İl başına yer sayısı",
+    "geoserver": "GeoServer WMS (sunucu çizer)",
+    "geoserverHint": "Bu görüntüyü GeoServer, SQL Server'daki verilerden OGC WMS standardıyla üretir. Bilgi için haritaya tıklayın. Çalışması için: docker compose --profile gis up -d ve ./geoserver/setup.sh"
   },
   "files": {
     "title": "Dosyalar",

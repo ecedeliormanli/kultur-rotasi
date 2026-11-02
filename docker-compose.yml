@@ -1,5 +1,6 @@
-# Local development stack. Start with: docker compose up -d
-# Later milestones add the API, the Angular app and GeoServer here.
+# Local development stack.
+#   docker compose up -d                  → SQL Server only
+#   docker compose --profile gis up -d    → SQL Server + GeoServer (WMS/WFS), then run ./geoserver/setup.sh
 services:
   db:
     image: mcr.microsoft.com/mssql/server:2025-latest
@@ -19,5 +20,34 @@ services:
       retries: 10
       start_period: 30s
 
+  geoserver:
+    # Publishes the database as OGC web services (WMS maps, WFS features). Optional: heavy (~1 GB RAM).
+    image: kartoza/geoserver:2.28.5
+    container_name: kultur-rotasi-geoserver
+    profiles: ["gis"]
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      GEOSERVER_ADMIN_USER: ${GEOSERVER_ADMIN_USER:-admin}
+      GEOSERVER_ADMIN_PASSWORD: ${GEOSERVER_ADMIN_PASSWORD:-ChangeMe_Ge0server!}
+      # The SQL Server plugin (with the Microsoft JDBC driver) ships inside the image
+      STABLE_EXTENSIONS: sqlserver-plugin
+      INITIAL_MEMORY: 512M
+      MAXIMUM_MEMORY: 1G
+      # Lets the Angular dev server (localhost:4200) call WMS GetFeatureInfo through its proxy
+      CORS_ENABLED: "true"
+    ports:
+      - "8080:8080"
+    volumes:
+      - geoserver-data:/opt/geoserver/data_dir
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fs http://localhost:8080/geoserver/web/ -o /dev/null"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 60s
+
 volumes:
   db-data:
+  geoserver-data:

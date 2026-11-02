@@ -40,7 +40,9 @@
     "markers": "Places",
     "heatmap": "Heatmap (density)",
     "provinces": "Places per province",
-    "legend": "Places per province"
+    "legend": "Places per province",
+    "geoserver": "GeoServer WMS (server-rendered)",
+    "geoserverHint": "GeoServer renders this image from the SQL Server data using the OGC WMS standard. Click the map for details. Requires: docker compose --profile gis up -d and ./geoserver/setup.sh"
   },
   "files": {
     "title": "Files",

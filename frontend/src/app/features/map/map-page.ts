@@ -32,7 +32,7 @@ import { MapLayers, PlaceMap } from './place-map';
   styleUrl: './map-page.scss',
 })
 export class MapPage {
-  private readonly language = inject(LanguageService);
+  protected readonly language = inject(LanguageService);
   private readonly http = inject(HttpClient);
 
   protected readonly placeTypes = placeTypes;
@@ -40,11 +40,17 @@ export class MapPage {
   protected readonly densityClasses = densityClasses;
   protected readonly densityLabel = densityLabel;
 
-  protected readonly layerNames: (keyof MapLayers)[] = ['markers', 'heatmap', 'provinces'];
+  protected readonly layerNames: (keyof MapLayers)[] = [
+    'markers',
+    'heatmap',
+    'provinces',
+    'geoserver',
+  ];
   protected readonly layers = signal<MapLayers>({
     markers: true,
     heatmap: false,
     provinces: false,
+    geoserver: false,
   });
   protected readonly imported = signal<{ name: string; features: FeatureCollection } | null>(null);
   protected readonly importError = signal<string | null>(null);
