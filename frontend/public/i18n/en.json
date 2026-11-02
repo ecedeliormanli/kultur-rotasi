@@ -34,5 +34,20 @@
   },
   "errors": {
     "api": "Cannot reach the API. Is the backend running?"
+  },
+  "layers": {
+    "title": "Layers",
+    "markers": "Places",
+    "heatmap": "Heatmap (density)",
+    "provinces": "Places per province",
+    "legend": "Places per province"
+  },
+  "files": {
+    "title": "Files",
+    "download": "Download",
+    "upload": "Upload GeoJSON or KML",
+    "uploaded": "{{name}}: {{count}} features on the map",
+    "remove": "Remove",
+    "error": "Could not read the file: {{detail}}"
   }
 }

@@ -1,3 +1,4 @@
+using KulturRotasi.Api.GeoFormats;
 using KulturRotasi.Api.Infrastructure;
 using KulturRotasi.Application.Abstractions;
 using KulturRotasi.Application.Common;
@@ -60,6 +61,25 @@ public sealed class PlacesController : ControllerBase
             cancellationToken);
 
         return Ok(GeoJsonMapper.ToFeatureCollection(places));
+    }
+
+    /// <summary>Downloads every matching place as a KML file (opens in Google Earth).</summary>
+    [HttpGet("kml")]
+    [Produces(KmlWriter.ContentType)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> Kml(
+        [FromServices] IQueryHandler<ListPlacesQuery, IReadOnlyList<PlaceSummaryDto>> handler,
+        PlaceType? type,
+        int? provinceId,
+        bool? unesco,
+        string? search,
+        CancellationToken cancellationToken)
+    {
+        var places = await handler.HandleAsync(
+            new ListPlacesQuery(new PlaceFilter(type, provinceId, unesco, search), RequestLanguage.Current),
+            cancellationToken);
+
+        return File(KmlWriter.Write(places, "Kültür Rotası"), KmlWriter.ContentType, "kultur-rotasi.kml");
     }
 
     /// <summary>Finds the places nearest to a point, closest first.</summary>

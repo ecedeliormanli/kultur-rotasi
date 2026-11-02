@@ -34,5 +34,20 @@
   },
   "errors": {
     "api": "API'ye ulaşılamadı. Backend çalışıyor mu?"
+  },
+  "layers": {
+    "title": "Katmanlar",
+    "markers": "Yerler",
+    "heatmap": "Isı haritası (yoğunluk)",
+    "provinces": "İllere göre yer sayısı",
+    "legend": "İl başına yer sayısı"
+  },
+  "files": {
+    "title": "Dosyalar",
+    "download": "İndir",
+    "upload": "GeoJSON veya KML yükle",
+    "uploaded": "{{name}}: {{count}} öğe haritada",
+    "remove": "Kaldır",
+    "error": "Dosya okunamadı: {{detail}}"
   }
 }

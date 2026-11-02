@@ -1,5 +1,6 @@
 import { Component, computed, inject, linkedSignal, signal } from '@angular/core';
-import { httpResource } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, httpResource } from '@angular/common/http';
+import type { FeatureCollection } from 'geojson';
 import { TranslocoPipe } from '@jsverse/transloco';
 import { LanguageService } from '../../core/language.service';
 import {
@@ -9,11 +10,14 @@ import {
   PlaceFeatureCollection,
   PlaceFilter,
   PlaceType,
+  ProvinceFeatureCollection,
+  densityClasses,
+  densityLabel,
   placeTypeColors,
   placeTypes,
   toQueryParams,
 } from '../../core/places.models';
-import { PlaceMap } from './place-map';
+import { MapLayers, PlaceMap } from './place-map';
 
 /**
  * The main page: filters and details on the left, the map on the right.
@@ -29,9 +33,21 @@ import { PlaceMap } from './place-map';
 })
 export class MapPage {
   private readonly language = inject(LanguageService);
+  private readonly http = inject(HttpClient);
 
   protected readonly placeTypes = placeTypes;
   protected readonly placeTypeColors = placeTypeColors;
+  protected readonly densityClasses = densityClasses;
+  protected readonly densityLabel = densityLabel;
+
+  protected readonly layerNames: (keyof MapLayers)[] = ['markers', 'heatmap', 'provinces'];
+  protected readonly layers = signal<MapLayers>({
+    markers: true,
+    heatmap: false,
+    provinces: false,
+  });
+  protected readonly imported = signal<{ name: string; features: FeatureCollection } | null>(null);
+  protected readonly importError = signal<string | null>(null);
 
   protected readonly filter = signal<PlaceFilter>({ type: null, unescoOnly: false, search: '' });
   protected readonly selectedSlug = signal<string | null>(null);
@@ -49,6 +65,21 @@ export class MapPage {
     params: toQueryParams(this.filter()),
     headers: { 'Accept-Language': this.language.current() },
   }));
+
+  /** Province borders are only downloaded once the thematic layer is switched on. */
+  protected readonly provinces = httpResource<ProvinceFeatureCollection>(() =>
+    this.layers().provinces
+      ? { url: '/api/provinces/geojson', params: { toleranceDegrees: 0.01 } }
+      : undefined,
+  );
+
+  /** Export links use ?culture= because a plain link cannot send an Accept-Language header. */
+  protected readonly downloadParams = computed(() =>
+    new URLSearchParams({
+      ...toQueryParams(this.filter()),
+      culture: this.language.current(),
+    }).toString(),
+  );
 
   protected readonly details = httpResource<PlaceDetails>(() => {
     const slug = this.selectedSlug();
@@ -100,6 +131,30 @@ export class MapPage {
     if (this.nearbyMode()) {
       this.nearbyCenter.set(point);
     }
+  }
+
+  protected setLayer(layer: keyof MapLayers, visible: boolean): void {
+    this.layers.update((layers) => ({ ...layers, [layer]: visible }));
+  }
+
+  /** Sends the file to the API, which converts KML or GeoJSON into GeoJSON for the map. */
+  protected upload(input: HTMLInputElement): void {
+    const file = input.files?.[0];
+    input.value = '';
+    if (!file) {
+      return;
+    }
+
+    const form = new FormData();
+    form.append('file', file);
+    this.importError.set(null);
+    this.http.post<FeatureCollection>('/api/import/preview', form).subscribe({
+      next: (features) => this.imported.set({ name: file.name, features }),
+      error: (error: HttpErrorResponse) => {
+        this.imported.set(null);
+        this.importError.set(error.error?.detail ?? error.error?.title ?? error.message);
+      },
+    });
   }
 
   protected toggleNearbyMode(): void {

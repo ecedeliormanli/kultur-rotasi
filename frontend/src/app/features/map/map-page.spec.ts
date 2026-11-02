@@ -107,4 +107,57 @@ describe('MapPage', () => {
 
     expect(element.textContent).toContain('Haritada bir noktaya tıkla');
   });
+
+  it('downloads the province borders only when the thematic layer is switched on', async () => {
+    const { element } = render();
+    http.expectOne('/api/places/geojson').flush(twoPlaces);
+    http.expectNone((r) => r.url === '/api/provinces/geojson');
+
+    const checkbox = findCheckbox(element, 'İllere göre yer sayısı');
+    checkbox.checked = true;
+    checkbox.dispatchEvent(new Event('change'));
+    TestBed.tick();
+
+    http
+      .expectOne((r) => r.url === '/api/provinces/geojson')
+      .flush({ type: 'FeatureCollection', features: [] });
+  });
+
+  it('builds export links with the filters and the language', async () => {
+    const { fixture, element } = render();
+    http.expectOne('/api/places/geojson').flush(twoPlaces);
+    await fixture.whenStable();
+
+    const kml = [...element.querySelectorAll('a')].find((a) => a.textContent?.trim() === 'KML')!;
+    expect(kml.getAttribute('href')).toBe('/api/places/kml?culture=tr');
+  });
+
+  it('shows the reason when an uploaded file is rejected', async () => {
+    const { fixture, element } = render();
+    http.expectOne('/api/places/geojson').flush(twoPlaces);
+
+    const input = element.querySelector<HTMLInputElement>('input[type="file"]')!;
+    Object.defineProperty(input, 'files', { value: [new File(['x'], 'notes.txt')] });
+    input.dispatchEvent(new Event('change'));
+
+    const request = http.expectOne('/api/import/preview');
+    expect(request.request.body).toBeInstanceOf(FormData);
+    request.flush(
+      {
+        title: 'The request is not valid.',
+        detail: 'Only .geojson, .json and .kml files are supported.',
+      },
+      { status: 400, statusText: 'Bad Request' },
+    );
+    await fixture.whenStable();
+
+    expect(element.querySelector('[role="alert"]')?.textContent).toContain('Only .geojson');
+  });
 });
+
+function findCheckbox(element: HTMLElement, label: string): HTMLInputElement {
+  const labelElement = [...element.querySelectorAll('label')].find((l) =>
+    l.textContent?.includes(label),
+  )!;
+  return labelElement.querySelector('input')!;
+}

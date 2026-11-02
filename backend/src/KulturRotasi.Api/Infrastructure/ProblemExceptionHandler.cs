@@ -26,7 +26,7 @@ public sealed class ProblemExceptionHandler(IProblemDetailsService problemDetail
             },
             DomainException domain => new ProblemDetails
             {
-                Title = "The request breaks a business rule.",
+                Title = "The request is not valid.",
                 Detail = domain.Message,
                 Status = StatusCodes.Status400BadRequest,
             },
