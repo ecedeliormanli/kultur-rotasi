@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Reflection;
 using System.Text.Json;
+using KulturRotasi.Domain.Common;
 using KulturRotasi.Domain.Places;
 using KulturRotasi.Domain.Provinces;
 using Microsoft.EntityFrameworkCore;
@@ -51,7 +52,7 @@ public sealed partial class DataSeeder(AppDbContext db, ILogger<DataSeeder> logg
             .Select(feature => new Province(
                 plateCode: Convert.ToInt32(feature.Attributes["plateCode"], CultureInfo.InvariantCulture),
                 name: (string)feature.Attributes["name"],
-                boundary: GeographyFixer.Fix(feature.Geometry)))
+                boundary: Geo.PrepareForGeography(feature.Geometry)))
             .ToList();
     }
 

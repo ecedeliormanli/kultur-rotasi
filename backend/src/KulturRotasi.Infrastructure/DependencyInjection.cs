@@ -1,4 +1,5 @@
 using System.Reflection;
+using KulturRotasi.Application.Abstractions;
 using KulturRotasi.Infrastructure.Persistence;
 using KulturRotasi.Infrastructure.Persistence.Seed;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ public static class DependencyInjection
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(connectionString, sql => sql.UseNetTopologySuite()));
 
+        services.AddScoped<IAppDbContext>(provider => provider.GetRequiredService<AppDbContext>());
         services.AddScoped<DataSeeder>();
 
         return services;

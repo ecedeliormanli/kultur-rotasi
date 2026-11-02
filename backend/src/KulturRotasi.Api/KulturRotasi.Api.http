@@ -1,0 +1,57 @@
+# Sample requests. In Rider, click the green ▶ next to a request (the API must be running).
+@api = http://localhost:5140
+
+### Places, filtered and paged (names in Turkish by default)
+GET {{api}}/api/places?type=Museum&page=1&pageSize=5
+
+### Same list in English
+GET {{api}}/api/places?unesco=true
+Accept-Language: en
+
+### Search by name, Turkish or English
+GET {{api}}/api/places?search=efes
+
+### One place with its description
+GET {{api}}/api/places/ephesus
+Accept-Language: en
+
+### The 5 places nearest to Kızılay, Ankara
+GET {{api}}/api/places/nearby?latitude=39.9208&longitude=32.8541&limit=5
+
+### Places within 50 km of Ephesus (circular buffer)
+GET {{api}}/api/places/nearby?latitude=37.9395&longitude=27.3417&radiusKm=50
+
+### Places inside a polygon drawn around Antalya (point-in-polygon)
+POST {{api}}/api/places/within
+Content-Type: application/json
+
+{
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [[[30.4, 36.7], [31.5, 36.7], [31.5, 37.1], [30.4, 37.1], [30.4, 36.7]]]
+  }
+}
+
+### Places within 15 km of a line along the Lycian coast (buffer around a line)
+POST {{api}}/api/places/within
+Content-Type: application/json
+
+{
+  "geometry": { "type": "LineString", "coordinates": [[29.0, 36.3], [30.6, 36.3]] },
+  "bufferKm": 15
+}
+
+### All places as GeoJSON (open the response in geojson.io to see them on a map)
+GET {{api}}/api/places/geojson
+
+### Provinces with the number of places inside each border
+GET {{api}}/api/provinces
+
+### Places inside İzmir's border
+GET {{api}}/api/provinces/35/places
+
+### Province borders as GeoJSON, simplified
+GET {{api}}/api/provinces/geojson?toleranceDegrees=0.01
+
+### Validation error: radius too large → 400 problem details
+GET {{api}}/api/places/nearby?latitude=39.92&longitude=32.85&radiusKm=1000

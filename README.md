@@ -51,6 +51,24 @@ Infrastructure ┘
 | `KulturRotasi.Infrastructure` | EF Core, migrations, identity, external services. |
 | `KulturRotasi.Api` | Controllers, middleware, dependency injection setup, OpenAPI. |
 
+## API
+
+Interactive documentation is at `/swagger` when the API runs in Development. Sample requests for Rider and VS Code are in [`KulturRotasi.Api.http`](backend/src/KulturRotasi.Api/KulturRotasi.Api.http).
+Texts are returned in the language from `Accept-Language` or `?culture=` (`tr` or `en`, default `tr`). Errors use RFC 9457 problem details.
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `GET` | `/api/places?type=&provinceId=&unesco=&search=&page=&pageSize=` | Filter, search and page places |
+| `GET` | `/api/places/{slug}` | One place with its description |
+| `GET` | `/api/places/nearby?latitude=&longitude=&radiusKm=&limit=` | Nearest places, optionally within a radius |
+| `POST` | `/api/places/within` | Places inside a GeoJSON geometry or within a buffer around it |
+| `GET` | `/api/places/geojson` | Places as a GeoJSON FeatureCollection |
+| `GET` | `/api/provinces` | Provinces with the number of places inside each border |
+| `GET` | `/api/provinces/{plateCode}/places` | Places inside a province border (point-in-polygon) |
+| `GET` | `/api/provinces/geojson?toleranceDegrees=` | Simplified province borders as GeoJSON |
+
+All spatial work (distance, buffer, point-in-polygon) runs inside SQL Server on `geography` columns with spatial indexes.
+
 ## Getting started
 
 ### Prerequisites
@@ -103,7 +121,7 @@ kultur-rotasi/
 │  ├─ src/        Domain · Application · Infrastructure · Api
 │  └─ tests/      UnitTests · IntegrationTests
 ├─ frontend/       open this folder in WebStorm/Rider (Angular app)
-├─ docs/          ER diagram (UML class diagram and BPMN process coming)
+├─ docs/          ER diagram, UML class diagram (BPMN process coming)
 ├─ docker-compose.yml
 └─ .github/workflows/ci.yml
 ```
@@ -112,7 +130,7 @@ kultur-rotasi/
 
 - [x] M0 Repository skeleton, Docker Compose, CI
 - [x] M1 Domain model, EF Core, spatial data, seed data, ER diagram
-- [ ] M2 Spatial API: filtering, nearest, buffer, point-in-polygon, GeoJSON
+- [x] M2 Spatial API: filtering, nearest, buffer, point-in-polygon, GeoJSON
 - [ ] M3 Angular + Leaflet map, Turkish and English UI
 - [ ] M4 Thematic map, heatmap, GeoJSON and KML import and export
 - [ ] M5 GeoServer WMS and WFS layers
