@@ -58,10 +58,14 @@ public sealed class ProvincesEndpointTests(ApiFactory factory)
     public async Task OpenApi_document_describes_the_endpoints()
     {
         var document = await _client.GetStringAsync("/openapi/v1.json");
+        using var json = JsonDocument.Parse(document);
 
         Assert.Contains("/api/places/nearby", document, StringComparison.Ordinal);
         Assert.Contains("/api/provinces/{plateCode}/places", document, StringComparison.Ordinal);
         // Geometries are documented as GeoJSON, not as NetTopologySuite's internal classes
         Assert.DoesNotContain("GeometryFactory", document, StringComparison.Ordinal);
+        // Enums are documented as strings, so Swagger UI shows a drop-down
+        var placeType = json.RootElement.GetProperty("components").GetProperty("schemas").GetProperty("PlaceType");
+        Assert.Equal("string", placeType.GetProperty("type").GetString());
     }
 }
