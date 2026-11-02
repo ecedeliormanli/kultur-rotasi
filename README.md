@@ -31,7 +31,7 @@
 | Data | SQL Server 2025 (spatial `geography`), EF Core 10, NetTopologySuite |
 | GIS | GeoServer (WMS / WFS), Leaflet, GeoJSON, KML |
 | Testing | xUnit, WebApplicationFactory, Testcontainers |
-| Frontend | Angular 22 (standalone components, signals) |
+| Frontend | Angular 22 (standalone components, signals, httpResource), Leaflet, Transloco |
 | DevOps | Docker Compose, GitHub Actions |
 
 ## Architecture
@@ -93,6 +93,7 @@ cd backend
 dotnet run --project src/KulturRotasi.Api
 
 # 3. Frontend  → http://localhost:4200
+#    The dev server forwards /api requests to the API (proxy.conf.json), so no CORS setup is needed.
 cd ../frontend
 npm install
 npm start
@@ -131,7 +132,7 @@ kultur-rotasi/
 - [x] M0 Repository skeleton, Docker Compose, CI
 - [x] M1 Domain model, EF Core, spatial data, seed data, ER diagram
 - [x] M2 Spatial API: filtering, nearest, buffer, point-in-polygon, GeoJSON
-- [ ] M3 Angular + Leaflet map, Turkish and English UI
+- [x] M3 Angular + Leaflet map, Turkish and English UI
 - [ ] M4 Thematic map, heatmap, GeoJSON and KML import and export
 - [ ] M5 GeoServer WMS and WFS layers
 - [ ] M6 Authentication, roles, OWASP hardening, suggestion workflow, BPMN

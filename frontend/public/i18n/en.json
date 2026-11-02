@@ -1,0 +1,38 @@
+{
+  "app": {
+    "title": "Kültür Rotası",
+    "tagline": "Map of museums and archaeological sites in Türkiye",
+    "language": "Language"
+  },
+  "placeType": {
+    "Museum": "Museum",
+    "ArchaeologicalSite": "Archaeological site",
+    "Monument": "Monument",
+    "Palace": "Palace"
+  },
+  "filters": {
+    "type": "Type",
+    "allTypes": "All",
+    "unesco": "UNESCO World Heritage only",
+    "search": "Search",
+    "searchPlaceholder": "e.g. Ephesus",
+    "count": "{{count}} places on the map"
+  },
+  "detail": {
+    "close": "Close",
+    "province": "Province",
+    "unesco": "UNESCO World Heritage",
+    "loading": "Loading…"
+  },
+  "nearby": {
+    "start": "Near me",
+    "stop": "Leave nearby search",
+    "hint": "Click a point on the map to find the places around it.",
+    "radius": "Radius: {{km}} km",
+    "results": "{{count}} places found",
+    "none": "No places within this radius. Try a larger one."
+  },
+  "errors": {
+    "api": "Cannot reach the API. Is the backend running?"
+  }
+}

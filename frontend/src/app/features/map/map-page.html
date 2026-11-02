@@ -1,0 +1,119 @@
+<aside class="sidebar">
+  @if (details.hasValue() && selectedSlug()) {
+    @let place = details.value();
+    <section class="panel">
+      <button type="button" class="link" (click)="selectedSlug.set(null)">
+        ← {{ 'detail.close' | transloco }}
+      </button>
+      <h2>{{ place.name }}</h2>
+      <p class="meta">
+        <span class="dot" [style.background]="placeTypeColors[place.type]"></span>
+        {{ 'placeType.' + place.type | transloco }} · {{ place.provinceName }}
+      </p>
+      @if (place.isUnescoWorldHeritage) {
+        <p class="badge">{{ 'detail.unesco' | transloco }}</p>
+      }
+      <p>{{ place.description }}</p>
+    </section>
+  } @else if (details.isLoading()) {
+    <p class="panel">{{ 'detail.loading' | transloco }}</p>
+  } @else {
+    <section class="panel">
+      <label>
+        {{ 'filters.search' | transloco }}
+        <input
+          type="search"
+          [placeholder]="'filters.searchPlaceholder' | transloco"
+          [value]="filter().search"
+          (input)="setSearch($any($event.target).value)"
+        />
+      </label>
+
+      <label>
+        {{ 'filters.type' | transloco }}
+        <select (change)="setType($any($event.target).value)">
+          <option value="" [selected]="!filter().type">{{ 'filters.allTypes' | transloco }}</option>
+          @for (type of placeTypes; track type) {
+            <option [value]="type" [selected]="filter().type === type">
+              {{ 'placeType.' + type | transloco }}
+            </option>
+          }
+        </select>
+      </label>
+
+      <label class="inline">
+        <input
+          type="checkbox"
+          [checked]="filter().unescoOnly"
+          (change)="setUnescoOnly($any($event.target).checked)"
+        />
+        {{ 'filters.unesco' | transloco }}
+      </label>
+
+      <p class="meta">{{ 'filters.count' | transloco: { count: placeCount() } }}</p>
+      <ul class="legend">
+        @for (type of placeTypes; track type) {
+          <li>
+            <span class="dot" [style.background]="placeTypeColors[type]"></span
+            >{{ 'placeType.' + type | transloco }}
+          </li>
+        }
+      </ul>
+    </section>
+
+    <section class="panel">
+      <button type="button" [class.active]="nearbyMode()" (click)="toggleNearbyMode()">
+        {{ (nearbyMode() ? 'nearby.stop' : 'nearby.start') | transloco }}
+      </button>
+
+      @if (nearbyMode()) {
+        <label>
+          {{ 'nearby.radius' | transloco: { km: nearbyRadiusKm() } }}
+          <input
+            type="range"
+            min="5"
+            max="300"
+            step="5"
+            [value]="nearbyRadiusKm()"
+            (input)="nearbyRadiusKm.set(+$any($event.target).value)"
+          />
+        </label>
+
+        @if (!nearbyCenter()) {
+          <p class="meta">{{ 'nearby.hint' | transloco }}</p>
+        } @else if (nearby.hasValue()) {
+          @let results = nearby.value();
+          <p class="meta">
+            {{
+              (results.length ? 'nearby.results' : 'nearby.none')
+                | transloco: { count: results.length }
+            }}
+          </p>
+          <ol class="results">
+            @for (place of results; track place.id) {
+              <li>
+                <button type="button" class="link" (click)="selectedSlug.set(place.slug)">
+                  {{ place.name }}
+                </button>
+                <span class="meta">{{ place.distanceKm }} km</span>
+              </li>
+            }
+          </ol>
+        }
+      }
+    </section>
+  }
+
+  @if (places.error() || details.error() || nearby.error()) {
+    <p class="error" role="alert">{{ 'errors.api' | transloco }}</p>
+  }
+</aside>
+
+<app-place-map
+  class="map"
+  [places]="places.value()"
+  [selectedSlug]="selectedSlug()"
+  [searchArea]="searchArea()"
+  (placeClick)="selectedSlug.set($event)"
+  (mapClick)="onMapClick($event)"
+/>
