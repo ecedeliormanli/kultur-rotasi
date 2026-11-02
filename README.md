@@ -101,6 +101,19 @@ npm install
 npm start
 ```
 
+### Optional: GeoServer (WMS / WFS)
+
+GeoServer publishes the same database as OGC web services. It needs about 1 GB of RAM, so it only starts with the `gis` profile.
+
+```bash
+docker compose --profile gis up -d     # SQL Server + GeoServer → http://localhost:8080/geoserver
+# run the API once (step 2) so migrations create the map views, then:
+./geoserver/setup.sh                   # workspace, data store, styles and layers through the REST API
+```
+
+In the Angular app, switch on the **GeoServer WMS** layer and click the map (GetFeatureInfo).
+Sample WMS / WFS requests and an explanation of the standards: [docs/geoserver.md](docs/geoserver.md).
+
 ### Tests
 
 ```bash
@@ -124,7 +137,8 @@ kultur-rotasi/
 │  ├─ src/        Domain · Application · Infrastructure · Api
 │  └─ tests/      UnitTests · IntegrationTests
 ├─ frontend/       open this folder in WebStorm/Rider (Angular app)
-├─ docs/          ER diagram, UML class diagram (BPMN process coming)
+├─ geoserver/     SLD styles and setup.sh (GeoServer configuration as code)
+├─ docs/          ER diagram, UML class diagram, GeoServer guide (BPMN process coming)
 ├─ docker-compose.yml
 └─ .github/workflows/ci.yml
 ```
@@ -136,7 +150,7 @@ kultur-rotasi/
 - [x] M2 Spatial API: filtering, nearest, buffer, point-in-polygon, GeoJSON
 - [x] M3 Angular + Leaflet map, Turkish and English UI
 - [x] M4 Thematic map, heatmap, GeoJSON and KML import and export
-- [ ] M5 GeoServer WMS and WFS layers
+- [x] M5 GeoServer WMS and WFS layers
 - [ ] M6 Authentication, roles, OWASP hardening, suggestion workflow, BPMN
 - [ ] M7 Favourites, routes, SignalR notifications, Redis cache
 - [ ] M8 Structured logging, health checks, Azure deployment

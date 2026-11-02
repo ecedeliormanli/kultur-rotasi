@@ -9,6 +9,7 @@ import {
   output,
   viewChild,
 } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import type { FeatureCollection } from 'geojson';
 import L from './leaflet';
 import {
@@ -18,6 +19,13 @@ import {
   densityColor,
   placeTypeColors,
 } from '../../core/places.models';
+import {
+  WmsFeature,
+  describeFeature,
+  featureInfoParams,
+  geoServerLayers,
+  geoServerWmsUrl,
+} from './geoserver';
 
 /** Centre of Türkiye and a zoom level that shows the whole country. */
 const turkeyCenter: L.LatLngTuple = [39.0, 35.2];
@@ -27,12 +35,15 @@ export interface MapLayers {
   markers: boolean;
   heatmap: boolean;
   provinces: boolean;
+  /** Map images rendered by GeoServer (WMS) instead of the browser. */
+  geoserver: boolean;
 }
 
 /**
  * A thin Angular wrapper around a Leaflet map. Leaflet works directly with the DOM, so the map is created
  * after the first render, and effects redraw a layer whenever its inputs change.
- * Layers from bottom to top: tiles, province choropleth, heatmap, imported file, search circle, markers.
+ * Layers from bottom to top: tiles, GeoServer WMS image, province choropleth, heatmap, imported file,
+ * search circle, markers.
  */
 @Component({
   selector: 'app-place-map',
@@ -50,7 +61,16 @@ export class PlaceMap {
   readonly places = input<PlaceFeatureCollection | undefined>();
   readonly provinces = input<ProvinceFeatureCollection | undefined>();
   readonly imported = input<FeatureCollection | null>(null);
-  readonly layers = input<MapLayers>({ markers: true, heatmap: false, provinces: false });
+  readonly layers = input<MapLayers>({
+    markers: true,
+    heatmap: false,
+    provinces: false,
+    geoserver: false,
+  });
+  /** Language for names in GeoServer popups (GeoServer returns both). */
+  readonly language = input('tr');
+  /** Whether a click on the GeoServer layer asks what is there (off while picking a nearby search point). */
+  readonly featureInfo = input(true);
   readonly selectedSlug = input<string | null>(null);
   /** When set, a circle shows the area searched around a point. */
   readonly searchArea = input<{ center: GeoPoint; radiusKm: number } | null>(null);
@@ -59,7 +79,16 @@ export class PlaceMap {
   readonly mapClick = output<GeoPoint>();
 
   private readonly container = viewChild.required<ElementRef<HTMLElement>>('map');
+  private readonly http = inject(HttpClient);
   private map?: L.Map;
+  private readonly wmsLayer = L.tileLayer.wms(geoServerWmsUrl, {
+    layers: geoServerLayers,
+    format: 'image/png',
+    transparent: true,
+    version: '1.1.1',
+    pane: 'wms',
+    attribution: 'GeoServer WMS',
+  });
   private readonly provinceLayer = L.layerGroup();
   private readonly heatLayer = L.layerGroup();
   private readonly importedLayer = L.layerGroup();
@@ -75,6 +104,7 @@ export class PlaceMap {
     effect(() => this.drawProvinces());
     effect(() => this.drawImported());
     effect(() => this.drawSearchArea());
+    effect(() => this.drawWms());
   }
 
   private createMap(): void {
@@ -82,6 +112,8 @@ export class PlaceMap {
     // Province polygons get their own pane below the default overlay pane (z-index 400),
     // so markers and other shapes always stay clickable on top of them
     this.map.createPane('provinces').style.zIndex = '350';
+    // GeoServer images sit just above the base tiles (tile pane z-index 200)
+    this.map.createPane('wms').style.zIndex = '300';
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
@@ -98,9 +130,10 @@ export class PlaceMap {
     ]) {
       layer.addTo(this.map);
     }
-    this.map.on('click', (event: L.LeafletMouseEvent) =>
-      this.mapClick.emit({ latitude: event.latlng.lat, longitude: event.latlng.lng }),
-    );
+    this.map.on('click', (event: L.LeafletMouseEvent) => {
+      this.mapClick.emit({ latitude: event.latlng.lat, longitude: event.latlng.lng });
+      this.showFeatureInfo(event);
+    });
 
     // Effects may have run before the map existed
     this.drawPlaces();
@@ -108,6 +141,56 @@ export class PlaceMap {
     this.drawProvinces();
     this.drawImported();
     this.drawSearchArea();
+    this.drawWms();
+  }
+
+  private drawWms(): void {
+    const visible = this.layers().geoserver;
+    if (!this.map) {
+      return;
+    }
+    if (visible) {
+      this.wmsLayer.addTo(this.map);
+    } else {
+      this.wmsLayer.remove();
+    }
+  }
+
+  /** WMS GetFeatureInfo: GeoServer tells which province and places are under the clicked pixel. */
+  private showFeatureInfo(event: L.LeafletMouseEvent): void {
+    const map = this.map;
+    if (!map || !this.layers().geoserver || !this.featureInfo()) {
+      return;
+    }
+
+    const bounds = map.getBounds();
+    const southWest = L.CRS.EPSG3857.project(bounds.getSouthWest());
+    const northEast = L.CRS.EPSG3857.project(bounds.getNorthEast());
+    const size = map.getSize();
+    const params = featureInfoParams({
+      bbox: { minX: southWest.x, minY: southWest.y, maxX: northEast.x, maxY: northEast.y },
+      size: { width: size.x, height: size.y },
+      point: event.containerPoint,
+    });
+
+    this.http.get<{ features: WmsFeature[] }>(geoServerWmsUrl, { params }).subscribe({
+      next: ({ features }) => {
+        if (features.length === 0) {
+          return;
+        }
+        const content = document.createElement('div');
+        for (const feature of features) {
+          const line = document.createElement('div');
+          // textContent, not innerHTML: data from the server is never parsed as HTML (no XSS)
+          line.textContent = describeFeature(feature, this.language());
+          content.append(line);
+        }
+        L.popup().setLatLng(event.latlng).setContent(content).openOn(map);
+      },
+      error: () => {
+        // GeoServer is optional (docker compose --profile gis); without it there is simply no popup
+      },
+    });
   }
 
   private drawPlaces(): void {

@@ -73,6 +73,9 @@
           {{ 'layers.' + layer | transloco }}
         </label>
       }
+      @if (layers().geoserver) {
+        <p class="meta">{{ 'layers.geoserverHint' | transloco }}</p>
+      }
       @if (layers().provinces) {
         <p class="meta">{{ 'layers.legend' | transloco }}</p>
         <ul class="legend">
@@ -171,6 +174,8 @@
   [layers]="layers()"
   [selectedSlug]="selectedSlug()"
   [searchArea]="searchArea()"
+  [language]="language.current()"
+  [featureInfo]="!nearbyMode()"
   (placeClick)="selectedSlug.set($event)"
   (mapClick)="onMapClick($event)"
 />
