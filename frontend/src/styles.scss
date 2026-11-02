@@ -85,6 +85,11 @@ label {
   h2 {
     margin: 0.5rem 0 0.25rem;
   }
+
+  h3 {
+    margin: 0 0 0.5rem;
+    font-size: 0.95rem;
+  }
 }
 
 .meta {
@@ -99,6 +104,15 @@ label {
   background: #fef3c7;
   color: #92400e;
   font-size: 0.8rem;
+}
+
+.swatch {
+  display: inline-block;
+  width: 1rem;
+  height: 0.7rem;
+  margin-right: 0.35rem;
+  border: 1px solid #a8a29e;
+  vertical-align: middle;
 }
 
 .dot {
@@ -116,6 +130,10 @@ label {
   padding: 0;
   list-style: none;
   font-size: 0.85rem;
+}
+
+a {
+  color: var(--accent);
 }
 
 .error {

@@ -30,7 +30,7 @@
               }
             ],
             "styles": ["node_modules/leaflet/dist/leaflet.css", "src/styles.scss"],
-            "allowedCommonJsDependencies": ["leaflet"]
+            "allowedCommonJsDependencies": ["leaflet", "leaflet.heat"]
           },
           "configurations": {
             "production": {

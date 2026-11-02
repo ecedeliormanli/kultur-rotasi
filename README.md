@@ -63,9 +63,11 @@ Texts are returned in the language from `Accept-Language` or `?culture=` (`tr` o
 | `GET` | `/api/places/nearby?latitude=&longitude=&radiusKm=&limit=` | Nearest places, optionally within a radius |
 | `POST` | `/api/places/within` | Places inside a GeoJSON geometry or within a buffer around it |
 | `GET` | `/api/places/geojson` | Places as a GeoJSON FeatureCollection |
+| `GET` | `/api/places/kml` | Places as a KML file (Google Earth) |
 | `GET` | `/api/provinces` | Provinces with the number of places inside each border |
 | `GET` | `/api/provinces/{plateCode}/places` | Places inside a province border (point-in-polygon) |
 | `GET` | `/api/provinces/geojson?toleranceDegrees=` | Simplified province borders as GeoJSON |
+| `POST` | `/api/import/preview` | Converts an uploaded GeoJSON or KML file to GeoJSON for the map (nothing is saved) |
 
 All spatial work (distance, buffer, point-in-polygon) runs inside SQL Server on `geography` columns with spatial indexes.
 
@@ -133,7 +135,7 @@ kultur-rotasi/
 - [x] M1 Domain model, EF Core, spatial data, seed data, ER diagram
 - [x] M2 Spatial API: filtering, nearest, buffer, point-in-polygon, GeoJSON
 - [x] M3 Angular + Leaflet map, Turkish and English UI
-- [ ] M4 Thematic map, heatmap, GeoJSON and KML import and export
+- [x] M4 Thematic map, heatmap, GeoJSON and KML import and export
 - [ ] M5 GeoServer WMS and WFS layers
 - [ ] M6 Authentication, roles, OWASP hardening, suggestion workflow, BPMN
 - [ ] M7 Favourites, routes, SignalR notifications, Redis cache

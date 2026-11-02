@@ -1,3 +1,5 @@
+import type { MultiPolygon, Polygon } from 'geojson';
+
 /** Shapes returned by the backend (see KulturRotasi.Application DTOs). */
 
 export const placeTypes = ['Museum', 'ArchaeologicalSite', 'Monument', 'Palace'] as const;
@@ -82,3 +84,46 @@ export const placeTypeColors: Record<PlaceType, string> = {
   Monument: '#7c3aed',
   Palace: '#dc2626',
 };
+
+/** Properties of each feature in GET /api/provinces/geojson. */
+export interface ProvinceFeatureProperties {
+  plateCode: number;
+  name: string;
+  placeCount: number;
+}
+
+export interface ProvinceFeatureCollection {
+  type: 'FeatureCollection';
+  features: {
+    type: 'Feature';
+    geometry: Polygon | MultiPolygon;
+    properties: ProvinceFeatureProperties;
+  }[];
+}
+
+/**
+ * Classes for the thematic (choropleth) map: provinces are coloured by how many places lie inside them.
+ * Few, clearly separated classes read better on a map than a continuous scale.
+ */
+export const densityClasses = [
+  { min: 0, max: 0, color: '#f1f5f9' },
+  { min: 1, max: 1, color: '#fde68a' },
+  { min: 2, max: 3, color: '#fbbf24' },
+  { min: 4, max: 6, color: '#d97706' },
+  { min: 7, max: Infinity, color: '#92400e' },
+] as const;
+
+export function densityColor(placeCount: number): string {
+  return (
+    densityClasses.find((c) => placeCount >= c.min && placeCount <= c.max) ?? densityClasses[0]
+  ).color;
+}
+
+export function densityLabel(densityClass: (typeof densityClasses)[number]): string {
+  if (densityClass.max === Infinity) {
+    return `${densityClass.min}+`;
+  }
+  return densityClass.min === densityClass.max
+    ? `${densityClass.min}`
+    : `${densityClass.min}–${densityClass.max}`;
+}
